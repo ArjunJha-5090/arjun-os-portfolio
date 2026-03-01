@@ -312,6 +312,7 @@ function MatrixBackground() {
 function Terminal() {
     const [history, setHistory] = useState([])
     const [input, setInput] = useState('')
+    const inputRef = useRef(null)
 
     useEffect(() => {
         let i = 0;
@@ -329,7 +330,18 @@ function Terminal() {
                 clearInterval(timer)
             }
         }, 500)
-        return () => clearInterval(timer)
+
+        // Graceful mobile-safe auto-focus after window animation
+        const focusTimer = setTimeout(() => {
+            if (inputRef.current) {
+                try { inputRef.current.focus() } catch (e) { /* ignore mobile focus block */ }
+            }
+        }, 600)
+
+        return () => {
+            clearInterval(timer)
+            clearTimeout(focusTimer)
+        }
     }, [])
 
     const handleCommand = (e) => {
@@ -357,7 +369,7 @@ function Terminal() {
             </div>
             <form onSubmit={handleCommand} className="terminal-input-row">
                 <span># </span>
-                <input autoFocus value={input} onChange={(e) => setInput(e.target.value)} />
+                <input ref={inputRef} value={input} onChange={(e) => setInput(e.target.value)} />
             </form>
         </div>
     )
