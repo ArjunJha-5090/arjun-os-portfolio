@@ -840,4 +840,24 @@ body {
   .network-stats {
     gap: 0.5rem;
   }
+
+  .center-widget {
+    position: relative;
+    top: auto;
+    left: auto;
+    transform: scale(0.75);
+    margin: 1rem auto;
+  }
+
+  /* Reverse the order so icons appear above widget gracefully */
+  .os-desktop-elite {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .desktop-icons-elite {
+    order: -1;
+    margin-bottom: 2rem;
+  }
 }
