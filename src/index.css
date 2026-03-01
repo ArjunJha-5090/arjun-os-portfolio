@@ -860,4 +860,67 @@ body {
     order: -1;
     margin-bottom: 2rem;
   }
+
+  .elite-taskbar {
+    padding: 0 1rem 1rem;
+    height: 70px;
+  }
+
+  .taskbar-slots {
+    gap: 0.5rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .elite-taskbar {
+    padding: 0 0.5rem 0.5rem;
+    height: 65px;
+  }
+
+  .taskbar-inner {
+    padding: 0 0.5rem;
+    border-radius: 12px;
+  }
+
+  .taskbar-start {
+    width: 40px;
+    height: 40px;
+  }
+
+  .task-slot {
+    width: 40px;
+    height: 40px;
+  }
+
+  .taskbar-slots {
+    gap: 0.1rem;
+    justify-content: space-evenly;
+  }
+
+  .taskbar-uptime {
+    display: none;
+    /* Hidden to free up taskbar space on small phones */
+  }
+
+  .os-window {
+    width: 100%;
+    height: 90%;
+    top: 5%;
+    left: 0;
+    border-radius: 10px;
+  }
+
+  .center-widget {
+    transform: scale(0.55);
+    margin: 0 auto;
+  }
+
+  .icon-box {
+    width: 50px;
+    height: 50px;
+  }
+
+  .desktop-icons-elite {
+    gap: 1rem;
+  }
 }
