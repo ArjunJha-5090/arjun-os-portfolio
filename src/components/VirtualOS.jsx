@@ -346,18 +346,43 @@ function Terminal() {
 
     const handleCommand = (e) => {
         e.preventDefault()
-        const cmd = input.trim().toLowerCase()
+        const cmdString = input.trim()
+        const cmd = cmdString.toLowerCase()
         let response = { text: `Runtime error: Command '${cmd}' not recognized in core.`, type: "error" }
 
-        if (cmd === 'help') response = { text: "Protocol: ls, clear, whoami, contact, github, analyze, ping", type: "system" }
+        if (cmd === '') return;
+
+        if (cmd === 'help') response = { text: "Protocol: ls, clear, whoami, github, analyze, ping, sudo, date, matrix, cat <file>, theme <color>", type: "system" }
         else if (cmd === 'ls') response = { text: "arjun_bio.md  projects_db/  contact_form.exe  curriculum_vitae.pdf", type: "file" }
         else if (cmd === 'whoami') response = { text: "Arjun Jha - Elite Developer\nB.Tech CSE Core @ SRMIST", type: "system" }
         else if (cmd === 'github') response = { text: "Opening https://github.com/ArjunJha-5090...", type: "system" }
         else if (cmd === 'analyze') response = { text: "[ OK ] CPU: Optimal. [ OK ] MEMORY: Secure. [ OK ] THREAT LEVEL: Zero.", type: "system" }
         else if (cmd === 'ping') response = { text: "Pinging root network... 12ms latency. Connection stable.", type: "system" }
+        else if (cmd === 'sudo') response = { text: `user is not in the sudoers file. This incident will be reported to the Architect.`, type: "error" }
+        else if (cmd === 'date') response = { text: new Date().toString(), type: "system" }
+        else if (cmd === 'matrix') response = { text: "Wake up Neo...\nThe Matrix has you.\nFollow the white rabbit.", type: "system" }
+        else if (cmd.startsWith('cat ')) {
+            const file = cmdString.substring(4).trim();
+            if (file === 'arjun_bio.md') response = { text: "Name: Arjun Jha\nDesignation: Full Stack Developer\nStatus: Online & Ready for Deployment.", type: "file" }
+            else if (file === 'contact_form.exe') response = { text: "Warning: Binary file. Cannot render in text mode.", type: "error" }
+            else response = { text: `cat: ${file}: No such file or directory`, type: "error" }
+        }
+        else if (cmd.startsWith('theme ')) {
+            const color = cmdString.substring(6).trim();
+            const validColors = {
+                'red': '#f7768e', 'green': '#9ece6a', 'blue': '#7aa2f7',
+                'yellow': '#e0af68', 'purple': '#bb9af7', 'cyan': '#7dcfff'
+            }
+            if (validColors[color.toLowerCase()]) {
+                document.documentElement.style.setProperty('--os-accent', validColors[color.toLowerCase()]);
+                response = { text: `System theme dynamically updated to ${color.toUpperCase()}.`, type: "system" }
+            } else {
+                response = { text: `Invalid theme color. Available: red, green, blue, yellow, purple, cyan.`, type: "error" }
+            }
+        }
         else if (cmd === 'clear') { setHistory([]); setInput(''); return; }
 
-        setHistory([...history, { text: `root@elite-os:# ${input}`, type: "input" }, response])
+        setHistory(prev => [...prev, { text: `root@elite-os:# ${cmdString}`, type: "input" }, response])
         setInput('')
         if (cmd === 'github') window.open('https://github.com/ArjunJha-5090', '_blank')
     }
