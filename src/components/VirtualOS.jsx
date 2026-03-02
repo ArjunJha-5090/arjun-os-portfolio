@@ -10,7 +10,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion'
 
 // --- Storage Helper ---
-const STORAGE_KEY = 'heffernan_os_user_data_v10'
+const STORAGE_KEY = 'heffernan_os_user_data_v11'
 const SYSTEM_PASSWORD = '509021'
 
 const DEFAULT_USER = {
@@ -22,17 +22,17 @@ const DEFAULT_USER = {
     linkedin: 'https://www.linkedin.com/in/arjun-jha-191512295/',
     bio: `I am a first-year B.Tech CSE Core student at SRM Institute of Science and Technology, Chennai. I am a Full Stack Frontend Developer with a tech stack including HTML, CSS, JavaScript, React, C, C++, and Python.
 
-I completed my schooling from Gyan Niketan Patna, where I served as:
-- House Captain (2022-2023)
-- Deputy Head Boy (2023-2024)
-- Head Boy (2024-2025)
-
 In college, I am active in:
+- Deputy Head, Alumni Outreach (International Student Chapter - Directorate of International Relations)
 - CSI Committee member (Aaruush Technomanagement Fest)
 - AARUUSH TECH TEAM - Team Envision
 - Member, Directorate of Alumni Affairs
-- Deputy Head, Alumni Outreach (International Student Chapter - Directorate of International Relations)
-- Contributor, THE HELPERS (SRM's biggest student-run community)`,
+- Contributor, THE HELPERS (SRM's biggest student-run community)
+
+I completed my schooling from Gyan Niketan Patna, where I served as:
+- Head Boy (2024-2025)
+- Deputy Head Boy (2023-2024)
+- House Captain (2022-2023)`,
     projects: [
         { title: 'portfolio-v5', desc: 'Personal high-fidelity 3D portfolio with OS theme.', url: 'https://arjunjha-5090.github.io/portfolio/', tags: 'React, Three.js, Framer' },
         { title: 'meditracker', desc: 'Healthcare application with dashboard and tracking.', url: 'https://medication-tracker-ui-nc51.vercel.app/', tags: 'React, Vite, Tailwind' },
@@ -571,6 +571,7 @@ function VirtualOSInner() {
                                     <div className="about-text-content">
                                         <h1>{userData.name.toUpperCase()}</h1>
                                         <h4>SRM Institute of Science and Technology // Chennai</h4>
+                                        <h5 style={{ color: 'var(--os-accent)', marginTop: '4px', marginBottom: '1rem', letterSpacing: '2px', opacity: 0.8 }}>2025-2029</h5>
                                         <p className="bio-text">{userData.bio}</p>
                                         <div className="tech-pills">
                                             {['HTML', 'CSS', 'JavaScript', 'React', 'C', 'C++', 'Python'].map(t => <span key={t}>{t}</span>)}
