@@ -569,13 +569,13 @@ function VirtualOSInner() {
                                         <img src={userData.avatar_url || "/profile.jpg"} alt={userData.name} className="profile-image" onError={(e) => { e.target.src = 'https://github.com/identicons/arjunjha.png' }} />
                                     </div>
                                     <div className="about-text-content">
+                                        <div className="tech-pills" style={{ marginBottom: '1.5rem' }}>
+                                            {['HTML', 'CSS', 'JavaScript', 'React', 'C', 'C++', 'Python'].map(t => <span key={t}>{t}</span>)}
+                                        </div>
                                         <h1>{userData.name.toUpperCase()}</h1>
                                         <h4>SRM Institute of Science and Technology // Chennai</h4>
                                         <h5 style={{ color: 'var(--os-accent)', marginTop: '4px', marginBottom: '1rem', letterSpacing: '2px', opacity: 0.8 }}>2025-2029</h5>
                                         <p className="bio-text">{userData.bio}</p>
-                                        <div className="tech-pills">
-                                            {['HTML', 'CSS', 'JavaScript', 'React', 'C', 'C++', 'Python'].map(t => <span key={t}>{t}</span>)}
-                                        </div>
                                     </div>
                                 </div>
                             )}
