@@ -7,7 +7,7 @@ import {
     Github, Linkedin, Phone, Mail, Send, Github as GithubIcon, Activity
 } from 'lucide-react'
 // eslint-disable-next-line no-unused-vars
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, useDragControls } from 'framer-motion'
 
 // --- Storage Helper ---
 const STORAGE_KEY = 'heffernan_os_user_data_v12'
@@ -42,11 +42,15 @@ I completed my schooling from Gyan Niketan Patna, where I served as:
 
 function Window({ title, children, onClose, id, activeWindow, setActiveWindow, isMinimized }) {
     const isFocused = activeWindow === id
+    const dragControls = useDragControls()
+
     if (isMinimized) return null
 
     return (
         <motion.div
             drag
+            dragListener={false}
+            dragControls={dragControls}
             dragMomentum={false}
             initial={{ scale: 0.9, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -55,7 +59,10 @@ function Window({ title, children, onClose, id, activeWindow, setActiveWindow, i
             className={`os-window ${isFocused ? 'focused' : ''}`}
             style={{ zIndex: isFocused ? 100 : 10 }}
         >
-            <div className="window-title">
+            <div className="window-title" onPointerDown={(e) => {
+                if (window.playOsClick) window.playOsClick()
+                dragControls.start(e)
+            }} style={{ cursor: 'grab', userSelect: 'none' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <Zap size={14} color="#7aa2f7" />
                     <span>{title}</span>
@@ -171,11 +178,24 @@ function LoginScreen({ onLogin, userName }) {
                         </form>
                     ) : (
                         <div style={{ marginTop: 'auto', borderTop: '1px solid #333', paddingTop: '1rem' }}>
-                            <div className="auth-sequence" style={{ color: '#9ece6a' }}>
-                                <div className="auth-dots">
-                                    {[0, 1, 2].map(i => <motion.div key={i} animate={{ opacity: [0, 1, 0] }} transition={{ delay: i * 0.2, repeat: Infinity }} />)}
+                            <div className="auth-sequence">
+                                <motion.div
+                                    animate={{
+                                        color: ['#f7768e', '#e0af68', '#7aa2f7', '#9ece6a'],
+                                        textShadow: ['0 0 8px currentColor', '0 0 4px currentColor', '0 0 8px currentColor', '0 0 10px currentColor']
+                                    }}
+                                    transition={{ duration: 1.4 }}
+                                    style={{ fontSize: '12px', fontWeight: 'bold' }}
+                                >
+                                    DECRYPTING SECURE PAYLOAD... [ BYPASSING FIREWALL ]
+                                </motion.div>
+                                <div style={{ width: '100%', height: '4px', background: '#111', marginTop: '12px', borderRadius: '4px', overflow: 'hidden' }}>
+                                    <motion.div style={{ height: '100%', background: '#9ece6a', boxShadow: '0 0 10px #9ece6a' }}
+                                        initial={{ width: '0%' }}
+                                        animate={{ width: '100%' }}
+                                        transition={{ duration: 1.4, ease: 'linear' }}
+                                    />
                                 </div>
-                                <span style={{ marginLeft: '10px' }}>MOUNTING DRIVE...</span>
                             </div>
                         </div>
                     )}
