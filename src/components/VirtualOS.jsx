@@ -10,7 +10,7 @@ import {
 import { motion, AnimatePresence } from 'framer-motion'
 
 // --- Storage Helper ---
-const STORAGE_KEY = 'heffernan_os_user_data_v11'
+const STORAGE_KEY = 'heffernan_os_user_data_v12'
 const SYSTEM_PASSWORD = '509021'
 
 const DEFAULT_USER = {
